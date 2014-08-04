@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">CouponManager</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Coupon Manager</string>
+    <string name="click_me">Add change!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="show_button_clicks_count">Show button clicks count</string>
+    <string name="show_activity_log">Show activity log</string>
+    <string name="show_coupons">Show coupons</string>
+    <string name="blank_text">Click one of buttons above</string>
+    <string name="update_coupon_count">Update coupon count</string>
 </resources>
