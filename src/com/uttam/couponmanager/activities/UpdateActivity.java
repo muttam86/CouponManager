@@ -72,7 +72,7 @@ public class UpdateActivity extends ActionBarActivity {
 		try {
 			count = Integer.parseInt(editText.getText().toString());
 		} catch (NumberFormatException e) {
-			ViewUtil.showToast(this, "Please enter a value for count.");
+			ViewUtil.showToast(this, "Please enter a valid value for count.");
 			return;
 		}
 		

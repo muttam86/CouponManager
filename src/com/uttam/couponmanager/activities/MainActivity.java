@@ -138,7 +138,14 @@ public class MainActivity extends ActionBarActivity {
     	}
     	
     	List<CouponCount> couponCountEntries = dbHelper.getAllCouponCountEntries();
-    	int checkoutAmount = Integer.parseInt(text);
+    	int checkoutAmount;
+    	try {
+    		checkoutAmount = Integer.parseInt(text);
+    	} catch (NumberFormatException e) {
+    		ViewUtil.showToast(this, "Please enter a valid value for checkout.");
+    		return;
+    	}
+    	
     	// FIXME: Do not use instance variable
     	checkoutCoupons = Calculator.checkout(couponCountEntries, checkoutAmount);
     	TableLayout tableLayout = (TableLayout)findViewById(R.id.tableLayout1);
