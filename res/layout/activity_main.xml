@@ -6,71 +6,73 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.uttam.couponmanager.MainActivity" >
+    tools:context="com.uttam.couponmanager.activities.MainActivity" >
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button4"
-        android:layout_alignBottom="@+id/button4"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/button4"
-        android:onClick="showChangeLogEntries"
-        android:text="@string/show_activity_log" />
-
-    <Button
-        android:id="@+id/button1"
+        android:id="@+id/showCouponsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:onClick="addChangeLogEntry"
-        android:text="@string/click_me" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/button1"
-        android:onClick="showButtonClicksCount"
-        android:text="@string/show_button_clicks_count" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="7dp"
-        android:onClick="updateCouponCountEntry"
-        android:text="@string/update_coupon_count" />
-    
-     <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_below="@+id/button5"
-        android:layout_marginTop="16dp"
         android:onClick="showCouponCountEntries"
         android:text="@string/show_coupons" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <Button
+        android:id="@+id/updateCouponsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignRight="@+id/button3"
-        android:layout_below="@+id/button3"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="45dp"
-        android:gravity="bottom"
-        android:maxLines="15"
-        android:scrollbars="vertical"
-        android:text="@string/blank_text" />
+        android:layout_above="@+id/tableLayoutScrollView"
+        android:layout_centerHorizontal="true"
+        android:onClick="updateCouponCountEntry"
+        android:text="@string/update_coupon_count" />
+
+    <Button
+        android:id="@+id/showChangeLogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayoutScrollView"
+        android:layout_alignParentRight="true"
+        android:onClick="showChangeLogEntries"
+        android:text="@string/show_activity_log" />
+
+    <ScrollView
+        android:id="@+id/tableLayoutScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/showCouponsButton"
+        android:layout_below="@+id/showCouponsButton"
+        android:layout_marginTop="72dp" >
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:padding="10dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" >
+        </TableLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/showChangeLogButton"
+        android:layout_below="@+id/showChangeLogButton"
+        android:onClick="checkout"
+        android:text="@string/button_checkout" />
+
+    <EditText
+        android:id="@+id/checkoutAmountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_checkout"
+        android:layout_toLeftOf="@+id/button_checkout"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

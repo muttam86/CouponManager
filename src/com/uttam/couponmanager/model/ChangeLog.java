@@ -2,16 +2,20 @@ package com.uttam.couponmanager.model;
 
 import java.util.Date;
 
-public class ChangeLogEntry {
+public class ChangeLog {
 	private int id;
+	private ChangeType changeType;
 	private int couponId;
 	private int count;
 	private long createTime;
 	
-	public ChangeLogEntry() {}
+	public enum ChangeType {SET, ADD, REMOVE};
+	
+	public ChangeLog() {}
 
-	public ChangeLogEntry(int _id, int _couponId, int _count, int _createTime) {
+	public ChangeLog(int _id, ChangeType _changeType, int _couponId, int _count, int _createTime) {
 		id = _id;
+		changeType = _changeType;
 		couponId = _couponId;
 		count = _count;
 		createTime = _createTime;
@@ -19,6 +23,10 @@ public class ChangeLogEntry {
 
 	public int getId() {
 		return id;
+	}
+	
+	public ChangeType getChangeType() {
+		return changeType;
 	}
 
 	public int getCouponId() {
@@ -40,6 +48,10 @@ public class ChangeLogEntry {
 	public void setCouponId(int couponId) {
 		this.couponId = couponId;
 	}
+	
+	public void setChangeType(ChangeType changeType) {
+		this.changeType = changeType;
+	}
 
 	public void setCount(int count) {
 		this.count = count;
@@ -52,6 +64,7 @@ public class ChangeLogEntry {
 	public String toString() {
 		return "ChangeLogEntry [ " +
 				"id: " + id + 
+				"change_type: " + changeType +
 				", coupon_id: " + couponId + 
 				", count: " + count + 
 				", create_item: " + new Date(createTime) + " ]";
