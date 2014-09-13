@@ -147,7 +147,8 @@ public class MainActivity extends ActionBarActivity {
     	}
     	
     	// FIXME: Do not use instance variable
-    	checkoutCoupons = Calculator.checkout(couponCountEntries, checkoutAmount);
+    	checkoutCoupons = new Calculator().checkout(couponCountEntries, checkoutAmount);
+    	Collections.sort(checkoutCoupons, CouponCount.Comparators.COUPON_VALUE_REVERSE);
     	TableLayout tableLayout = (TableLayout)findViewById(R.id.tableLayout1);
     	buildCouponCountTable(tableLayout, checkoutCoupons);
     	
@@ -188,7 +189,7 @@ public class MainActivity extends ActionBarActivity {
     	}
     	
     	for(CouponCount usedCouponCount : checkoutCoupons) {
-    		CouponCount existingCouponCount = dbHelper.getCouponCount(usedCouponCount.getCoupon().getId());
+    		CouponCount existingCouponCount = dbHelper.getCouponCount(usedCouponCount.getCouponId());
     		int newCount = existingCouponCount.getCount() - usedCouponCount.getCount();
     		if(newCount < 0) {
     			new RuntimeException("Oops! Something went wrong. Negative count!");
@@ -198,7 +199,7 @@ public class MainActivity extends ActionBarActivity {
     		
     		// Add change log entry
     		ChangeLog changeLogEntry = new ChangeLog();
-        	changeLogEntry.setCouponId(usedCouponCount.getCoupon().getId());
+        	changeLogEntry.setCouponId(usedCouponCount.getCouponId());
         	changeLogEntry.setChangeType(ChangeType.REMOVE);
         	changeLogEntry.setCount(usedCouponCount.getCount());
         	dbHelper.addChangeLogEntry(changeLogEntry);
@@ -232,11 +233,11 @@ public class MainActivity extends ActionBarActivity {
     		TableRow row = new TableRow(this);
     		
     		TextView couponNameView = new TextView(this);
-    		couponNameView.setText(entry.getCoupon().getName() + "");
+    		couponNameView.setText(entry.getCouponName() + "");
     		row.addView(couponNameView);
     		
     		TextView couponValueView = new TextView(this);
-    		couponValueView.setText(entry.getCoupon().getValue() + "");
+    		couponValueView.setText(entry.getCouponValue() + "");
     		row.addView(couponValueView);
     		
     		TextView couponCountView = new TextView(this);
@@ -244,7 +245,7 @@ public class MainActivity extends ActionBarActivity {
     		row.addView(couponCountView);
     		
     		TextView totalValueView = new TextView(this);
-    		int totalValue = entry.getCoupon().getValue() * entry.getCount();
+    		int totalValue = entry.getCouponValue() * entry.getCount();
     		totalValueView.setText(totalValue  + "");
     		row.addView(totalValueView);
     		

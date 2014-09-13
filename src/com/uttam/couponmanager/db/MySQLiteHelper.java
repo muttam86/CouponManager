@@ -91,7 +91,7 @@ import com.uttam.couponmanager.model.CouponCount;
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		
-		String getQuery = "SELECT * FROM " + COUPON_COUNT_TABLE_NAME + " WHERE coupon_id = " + newEntry.getCoupon().getId();
+		String getQuery = "SELECT * FROM " + COUPON_COUNT_TABLE_NAME + " WHERE coupon_id = " + newEntry.getCouponId();
 		Cursor cursor = db.rawQuery(getQuery, null);
 		
 		Log.d("Get query result count: ", "" + cursor.getCount());
@@ -101,9 +101,9 @@ import com.uttam.couponmanager.model.CouponCount;
 		values.put("last_update_time", System.currentTimeMillis());
 		
 		if(cursor.getCount() > 0) {
-			db.update(COUPON_COUNT_TABLE_NAME, values, "coupon_id = " + newEntry.getCoupon().getId(), null);
+			db.update(COUPON_COUNT_TABLE_NAME, values, "coupon_id = " + newEntry.getCouponId(), null);
 		} else {
-			values.put("coupon_id", newEntry.getCoupon().getId());
+			values.put("coupon_id", newEntry.getCouponId());
 			values.put("create_time", System.currentTimeMillis());
 			db.insert(COUPON_COUNT_TABLE_NAME,
 					null, // nullColumnHack

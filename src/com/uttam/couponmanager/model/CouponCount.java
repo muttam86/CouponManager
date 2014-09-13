@@ -18,9 +18,28 @@ public class CouponCount {
 		createTime = _createTime;
 		lastUpdateTime = _lastUpdateTime;
 	}
-
+	
+	public CouponCount(CouponCount couponCount) {
+		coupon = couponCount.getCoupon();
+		count = couponCount.getCount();
+		createTime = couponCount.getCreateTime();
+		lastUpdateTime = couponCount.getLastUpdateTime();
+	}
+	
 	public Coupon getCoupon() {
 		return coupon;
+	}
+	
+	public int getCouponId() {
+		return coupon.getId();
+	}
+	
+	public String getCouponName() {
+		return coupon.getName();
+	}
+
+	public int getCouponValue() {
+		return coupon.getValue();
 	}
 
 	public int getCount() {
@@ -66,21 +85,29 @@ public class CouponCount {
 		}
 		
 		for(CouponCount couponCount : coupons) {
-			totalValue += couponCount.getCount() * couponCount.getCoupon().getValue();
+			totalValue += couponCount.getCount() * couponCount.getCouponValue();
 		}
 		
 		return totalValue;
+	}
+	
+	public static int getTotalCount(List<CouponCount> list) {
+		int sum = 0;
+		for(CouponCount couponCount : list) {
+			sum += couponCount.getCount();
+		}
+		return sum;
 	}
 	
 	public static class Comparators {
 		public static Comparator<CouponCount> COUPON_VALUE_REVERSE = new Comparator<CouponCount>() {
 			@Override
 			public int compare(CouponCount arg0, CouponCount arg1) {
-				if(arg0.getCoupon().getValue() > arg1.getCoupon().getValue()) {
+				if(arg0.getCouponValue() > arg1.getCouponValue()) {
 					return -1;
 				}
 				
-				if(arg0.getCoupon().getValue() < arg1.getCoupon().getValue()) {
+				if(arg0.getCouponValue() < arg1.getCouponValue()) {
 					return 1;
 				}
 				
@@ -91,11 +118,11 @@ public class CouponCount {
 		public static Comparator<CouponCount> TOTAL_VALUE_REVERSE = new Comparator<CouponCount>() {
 			@Override
 			public int compare(CouponCount arg0, CouponCount arg1) {
-				if(arg0.getCoupon().getValue() * arg0.getCount() > arg1.getCoupon().getValue() * arg0.getCount()) {
+				if(arg0.getCouponValue() * arg0.getCount() > arg1.getCouponValue() * arg0.getCount()) {
 					return -1;
 				}
 				
-				if(arg0.getCoupon().getValue() * arg0.getCount() < arg1.getCoupon().getValue() * arg0.getCount()) {
+				if(arg0.getCouponValue() * arg0.getCount() < arg1.getCouponValue() * arg0.getCount()) {
 					return 1;
 				}
 				
